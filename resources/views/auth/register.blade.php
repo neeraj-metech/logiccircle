@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -32,6 +33,25 @@
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Product') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="product" class="form-control" name="product" required>
+                                    <option value="">Select Product</option>
+                                  <?php foreach ($products as $key => $value): ?>
+                                    <option value="<?php  echo $value->id;?>"><?php echo $value->product_name; ?></option>
+                                  <?php endforeach ?>  
+                                </select>
+
+                                @error('product')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

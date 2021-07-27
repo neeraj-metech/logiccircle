@@ -7,6 +7,9 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegistrationMail;
+use App\Product;
 
 class RegisterController extends Controller
 {
@@ -40,6 +43,12 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        $products = Product::all();
+        return view('auth.register')->with(['products'=>$products]);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -51,6 +60,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'product' => ['required'],
             'password' => ['required', 'string', 'min:3', 'confirmed'],
         ]);
     }
@@ -63,10 +73,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $userId =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'product_id' => $data['product'],
             'password' => Hash::make($data['password']),
         ]);
+        $product = Product::find($data['product']);
+        if ($userId['id']) {
+            $templateData = array(
+                    "name" => $data['name'],
+                    "product" => $product->product_name,
+                    "url" => url('/login')
+                );
+            Mail::to('test@gmail.com')->send(new RegistrationMail($templateData));
+        }
+        return $userId;
     }
 }

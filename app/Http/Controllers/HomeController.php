@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
+use App\Product;
+
 class HomeController extends Controller
 {
     /**
@@ -23,6 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // return Product::find(1)->user;
+        // return user::find(4)->product;
         return view('home');
     }
 }
