@@ -21,7 +21,7 @@ class PdfMaker extends Controller
 
 
     }
-
+	
 	function downloadpdf(Request $request){
 		$email = decrypt($request->id);
 		$user = User::where('email',$email)->first();
@@ -31,9 +31,9 @@ class PdfMaker extends Controller
 			$user = $user->toArray();
 			$download_count = $user['download_count'];
 			if($limit > $download_count){
-				// User::where('email',$email)
-				// ->where('id',$user['id'])
-				// ->update(['download_count'=>$download_count+1]);
+				User::where('email',$email)
+				->where('id',$user['id'])
+				->update(['download_count'=>$download_count+1]);
 				$product = Product::find($user['product_id']);
 				$templateData = array(
                     "name" => $user['name'],
