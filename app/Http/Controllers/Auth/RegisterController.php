@@ -84,7 +84,8 @@ class RegisterController extends Controller
             $templateData = array(
                     "name" => $data['name'],
                     "product" => $product->product_name,
-                    "url" => url('/login')
+                    "url" => url('/login'),
+                    'pdf_link'=> url('/downloadpdf').'/'.encrypt($data['email'])
                 );
             Mail::to('test@gmail.com')->send(new RegistrationMail($templateData));
         }

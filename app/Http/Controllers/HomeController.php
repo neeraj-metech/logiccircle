@@ -28,6 +28,12 @@ class HomeController extends Controller
     {
         // return Product::find(1)->user;
         // return user::find(4)->product;
-        return view('home');
+        $products = Product::all();
+        return view('home')->with(["products"=>$products]);
+    }
+    public function productusers(Request $request){
+        $id = $request->id;
+        $users = Product::find($id)->user->toArray();
+        return view('productusers')->with(["users"=>$users]);
     }
 }

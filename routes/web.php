@@ -19,3 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('pdf','PdfMaker@generator');
+Route::get('downloadpdf/{id}','PdfMaker@downloadpdf');
+Route::get('productusers/','HomeController@productusers')->name('productusers');
+Route::get('productusers/{id}','HomeController@productusers');

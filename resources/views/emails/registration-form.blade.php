@@ -3,7 +3,6 @@
 
 <head>
     <title>
-
     </title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -216,6 +215,16 @@
                                                     </td>
                                                 </tr>
                                             </table>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+
+                                            <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:20px;text-align:left;color:#525252;">
+                                                Download Pdf <a href="{{$data['pdf_link']}}" style="color:#2F67F6">Click her</a>
+                                            </div>
 
                                         </td>
                                     </tr>
